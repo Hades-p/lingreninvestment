@@ -120,7 +120,6 @@ project:
   dzhtconfig: 1 #1电子合同标识为生产 2电子合同标识为测试
   txurl: 1 #1腾讯视频回调地址生产 2腾讯视频回调地址测试
   smsConfig: 1 #1发送邮件标识为生产 2发送邮件标识为测试
-  notsecurity: /product/deposit/**,/smsRecord/saveSmsRecord,/logerInfo/info,/noAuth/**,/v2/api-docs,/fileRedirect/**,/domain/build
   wechatConfig: 1
   
   xxljob:
@@ -183,7 +182,7 @@ xxl:
       address:
       ip:
       port: 8012
-      logpath: /data/applogs/xxl-job/jobhandler
+      logpath: /data/applogs/xxl-job/
       logretentiondays: 30
 management:
   endpoints:
