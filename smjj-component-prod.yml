@@ -1,0 +1,193 @@
+spring:
+  datasource:
+    url:
+    username:
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid: 
+      start-view-servlet:
+        enabled: false
+    filters: stat,wall,log4j
+    maxActive: 200
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxOpenPreparedStatements: 20
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 500
+          batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        session_factory:
+          statement_inspector: com.smjj.config.util.JpaInterceptor
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+    date-format: yyyy-MM-dd HH:mm:ss
+  #rabbitmq
+  rabbitmq:
+    host: 192.168.10.176
+    port: 5672
+    username: liren
+    password: dwafgtr@2023
+    virtual-host: /
+    publisher-confirms: true #消息发送到交换机确认机制，是否确认会调
+    publisher-returns: true #消息发送到交换机确认机制，是否确认返回会掉
+    connection-timeout: 10000
+    template:
+      mandatory: true
+
+  servlet:
+    multipart:
+      enabled: true   # 启用http上传处理
+      # 5MB   100MB  ,5G = 5*1024MB
+      #前台，设置3G max-file-size:1024 * 1024 * 1024 * 3=3072M
+      max-file-size: 3072MB
+      max-request-size: 3072MB
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+  redis:
+    host: stg-xine-plus.lingreninvestment.com.0001.cnn1.cache.amazonaws.com.cn
+    port: 6379
+    password:
+    timeout: 2000ms  # 连接超时时间（毫秒）默认是2000ms
+    jedis:
+      pool:
+        max-active: 100  #最大连接数据库连接数,设 0 为没有限制
+        max-wait: -1ms  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 50 #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+        min-idle: 0 #最小等待连接中的数量,设 0 为没有限制
+  session:
+    store-type: none
+
+feign:
+  # 启用Okhttp作为底层Http网络框架，性能更优。
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+    max-connections: 200  # feign最大连接数
+    max-connections-per-route: 50  # feign单个路径的最大连接数
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 60000
+
+        # feign全局日志级别none、basic（生产环境）、full（开发环境）
+        loggerLevel: basic
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+  threadpool:
+    default:
+      coreSize: 100
+      maxQueueSize: 100
+      queueSizeRejectionThreshold: 100
+
+project:
+  variant: -lingren
+  dbid: 4
+  type: 2 #1表示注册模块 2：业务模块
+  isopensms: 1 #1标识为发送短信 2：不发送短信
+  environmental: 3  #正式环境
+  dzhtconfig: 1 #1电子合同标识为生产 2电子合同标识为测试
+  txurl: 1 #1腾讯视频回调地址生产 2腾讯视频回调地址测试
+  smsConfig: 1 #1发送邮件标识为生产 2发送邮件标识为测试
+  notsecurity: /product/deposit/**,/smsRecord/saveSmsRecord,/logerInfo/info,/noAuth/**,/v2/api-docs,/fileRedirect/**,/domain/build
+  wechatConfig: 1
+  
+  xxljob:
+    userName: lingren
+    password: lingren@@2022
+    xxlJobUri: http://1stg-xine-plus.lingreninvestment.com:8801/xxl-job-admin
+      
+file:
+  type: 3 #1fdfs 2:oss 3:s3
+
+aliyun:
+  oss:
+    accesskeyid: 
+    accesskeysecret: 
+    endpoint: 
+    bucketName: 
+    bucketImgUrl: 
+
+aws:
+  s3:
+    bucketName: stg-xine-plus
+
+fdfs:
+  soTimeout: 1500
+  connectTimeout: 600
+  thumbImage: #缩略图生成参数
+    width: 150
+    height: 150
+  trackerList: #TrackerList参数,支持多个
+    - 192.168.13.211:22122
+  downloadUrl: https://stg-xine-plus.lingreninvestment.com/
+
+logging:
+  config: classpath:logback-formal-desensitize.xml
+  level:
+    root: info
+    com.netflix.discovery: ERROR
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+    org.springframework: ERROR
+    org.springframework.security: ERROR
+    org.apache: ERROR
+    org.quartz: ERROR
+    springfox.documentation: ERROR
+    com.alibaba: ERROR
+    com.netflix: ERROR
+    org.jodconverter.office: ERROR
+    io.netty: ERROR
+    com.zaxxer.hikari: ERROR
+    com.codingapi.txlcn: ERROR
+
+#xxljob
+xxl:
+  job:
+    admin:
+      addresses: http://stg-xine-plus.lingreninvestment.com
+    accessToken:
+    executor:
+      appname: xxl-job-executor-component
+      address:
+      ip:
+      port: 8012
+      logpath: /data/applogs/xxl-job/jobhandler
+      logretentiondays: 30
+management:
+  endpoints:
+    enabled-by-default: false
+
+zuul:
+  routes: /api/compotent
