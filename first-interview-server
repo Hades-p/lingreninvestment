@@ -1,0 +1,106 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 10020
+
+spring:
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  redis:
+    open: false  # 是否开启redis缓存  true开启   false关闭
+    database: 0
+    host: stg-xine-plus.lingreninvestment.comd
+    port: 6379
+    username: default
+    password: dwaw@10021
+    timeout: 6000ms  # 连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10      # 连接池中的最大空闲连接
+        min-idle: 5       # 连接池中的最小空闲连接
+  mvc:
+    throw-exception-if-no-handler-found: true
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://rm-bp19ju6h31eiarvb50o.mysql.rds.aliyuncs.com:3306/first_interview?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: dwaadafwfa
+      password: feawddwasafwa
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      #Oracle需要打开注释
+      #validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        #login-username: admin
+        #login-password: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+#  resources:
+#    add-mappings: false
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.first.entity
+  type-aliases-super-type: java.lang.Object
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+renren:
+  redis:
+    open: false
+  shiro:
+    redis: false
+  # APP模块，是通过jwt认证的，如果要使用APP模块，则需要修改【加密秘钥】
+  jwt:
+    # 加密秘钥
+    secret: f4e2eadwd5awdaw20dwa34348dwaddwf86bawd67cde581c0f9eb5[www.renren.io]
+    # token有效时长，7天，单位秒
+    expire: 604800
+    header: token
+first-interview:
+  elasticsearch:
+    host: 127.0.0.1:9200
+  manage-media:
+    upload-location: D:/media/vedio/
+    mq:
+      queue-media-video-processor: queue_media_video_processor
+      routingkey-media-video: routingkey_media_video
+
+oss:
+  endpoint: https://oss-cn-hangzhou.aliyuncs.com
+  accessKeyId: LTAIawdhtdQtaGYPoawda74kyYwuS4B6
+  accessKeySecret: PEfawdegBfexdlqWs5SELyPfeYmgsO
+  hostName: oss-cn-hangzhou.aliyuncs.com
+  bucket: firstinterview
