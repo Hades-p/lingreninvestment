@@ -126,7 +126,7 @@ project:
   xxljob:
     userName: lingren
     password: lingren@@2022
-    xxlJobUri: http://1stg-xine-plus.lingreninvestment.com:8801/xxl-job-admin
+    xxlJobUri: http://stg-xine-plus.lingreninvestment.com:8801/xxl-job-admin
       
 file:
   type: 3 #1fdfs 2:oss 3:s3
