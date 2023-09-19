@@ -56,8 +56,8 @@ spring:
       stat-view-servlet:
         enabled: true
         url-pattern: /druid/*
-        #login-username: admin
-        #login-password: admin
+        #login-username: druid
+        #login-password: UNAMGORKEDJNGMESIJIO
       filter:
         stat:
           log-slow-sql: true
@@ -85,7 +85,7 @@ renren:
   # APP模块，是通过jwt认证的，如果要使用APP模块，则需要修改【加密秘钥】
   jwt:
     # 加密秘钥
-    secret: f4e2eadwd5awdaw20dwa34348dwaddwf86bawd67cde581c0f9eb5[www.renren.io]
+    secret: f4e2eadwd5WAawd67cde581c0ADWf9eb5
     # token有效时长，7天，单位秒
     expire: 604800
     header: token
@@ -93,14 +93,14 @@ first-interview:
   elasticsearch:
     host: 127.0.0.1:9200
   manage-media:
-    upload-location: D:/media/vedio/
+    upload-location: D:/dev/lingren/
     mq:
       queue-media-video-processor: queue_media_video_processor
       routingkey-media-video: routingkey_media_video
 
 oss:
   endpoint: https://oss-cn-hangzhou.aliyuncs.com
-  accessKeyId: LTAIawdhtdQtaGYPoawda74kyYwuS4B6
-  accessKeySecret: PEfawdegBfexdlqWs5SELyPfeYmgsO
+  accessKeyId: LTAIawadwawddhtdQtaGYwdP
+  accessKeySecret: PEfadwadwdegBfexdlqWs5SELyPfeYmgsO
   hostName: oss-cn-hangzhou.aliyuncs.com
-  bucket: firstinterview
+  bucket: lingren-xin
